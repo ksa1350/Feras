@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher's Day 2025 — Firas Talal Salem</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(180deg,#081229,#0c1838,#0e1b44);
+  color:#e9f1ff;margin:0;line-height:1.8;overflow-x:hidden;
+}
+h1,h2{text-align:center}
+.container{width:min(1100px,92vw);margin:auto}
+.card{background:#132241;border-radius:20px;padding:20px;margin:15px 0;
+  box-shadow:0 8px 25px rgba(0,0,0,.3);transition:.3s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-5px);box-shadow:0 12px 35px rgba(0,0,0,.4)}
+button{cursor:pointer;border:none;border-radius:10px;padding:10px 18px;font-weight:700;margin:5px}
+.btn{background:linear-gradient(135deg,#ffce51,#ffac33);color:#000}
+.btn-ghost{background:rgba(255,255,255,.08);color:#fff}
+footer{text-align:center;padding:20px;color:#aaa}
+#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+</style>
+</head>
+<body>
+<canvas id="confetti-canvas"></canvas>
+<header class="container">
+  <h1>Teacher's Day 2025 🎓</h1>
+  <p style="text-align:center">Created by <b>Firas Talal Salem</b></p>
+  <div style="text-align:center;margin:10px">
+    <button class="btn" id="celebrate">Start Celebration 🎉</button>
+    <button class="btn-ghost" onclick="toggleDark()">Toggle Theme 🌙</button>
+  </div>
+</header>
+
+<main class="container">
+  <section>
+    <h2>My Message</h2>
+    <div class="card">
+      <p>"Teachers are the light that guides our way, the strength that helps us grow, and the heart that inspires dreams. Thank you for everything!"</p>
+      <p>— Firas Talal Salem</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Thank You Notes</h2>
+    <div class="card"><h3>Amjad Ali</h3><p>Thank you for your dedication and patience. You always inspire excellence.</p></div>
+    <div class="card"><h3>Naïf Alslmy</h3><p>Your lessons taught us persistence and courage. Thank you for being a true mentor.</p></div>
+    <div class="card"><h3>Ahmad</h3><p>You showed us how to dream and achieve. Deep gratitude for your guidance.</p></div>
+    <div class="card"><h3>Junaid</h3><p>Your support and motivation made learning joyful. God bless you always.</p></div>
+    <div class="card"><h3>Uzair</h3><p>Learning with you was an inspiring journey full of curiosity and fun.</p></div>
+    <div class="card"><h3>Hassan</h3><p>You left a mark that will never fade. Thank you for your kindness and care.</p></div>
+  </section>
+</main>
+
+<footer>
+  Designed with ❤️ by <b>Firas Talal Salem</b> — Teacher's Day 2025
+</footer>
+
+<script>
+const canvas=document.getElementById('confetti-canvas');
+const ctx=canvas.getContext('2d');
+let confettis=[];let animating=false;let animationId=null;
+
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+window.addEventListener('resize',resize);resize();
+
+function Confetti(){
+  this.x=Math.random()*canvas.width;
+  this.y=Math.random()*canvas.height-canvas.height;
+  this.size=Math.random()*8+2;
+  this.color=`hsl(${Math.random()*360},100%,50%)`;
+  this.speed=Math.random()*3+2;
+  this.opacity=Math.random()*0.7+0.3;
+}
+Confetti.prototype.update=function(){
+  this.y+=this.speed;
+  if(this.y>canvas.height){this.y=0;this.x=Math.random()*canvas.width;}
+};
+Confetti.prototype.draw=function(){
+  ctx.beginPath();
+  ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+  ctx.fillStyle=this.color;
+  ctx.globalAlpha=this.opacity;
+  ctx.fill();
+  ctx.globalAlpha=1;
+};
+
+function createConfettis(){confettis=[];for(let i=0;i<150;i++){confettis.push(new Confetti());}}
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  confettis.forEach(c=>{c.update();c.draw();});
+  animationId=requestAnimationFrame(animate);
+}
+
+document.getElementById('celebrate').addEventListener('click',()=>{
+  const btn=document.getElementById('celebrate');
+  if(!animating){
+    createConfettis();
+    animate();
+    animating=true;
+    btn.textContent='Stop Celebration 🛑';
+  } else {
+    cancelAnimationFrame(animationId);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    animating=false;
+    btn.textContent='Start Celebration 🎉';
+  }
+});
+
+function toggleDark(){
+  document.body.classList.toggle('light');
+  if(document.body.classList.contains('light')){
+    document.body.style.background='linear-gradient(180deg,#f7f9ff,#ffffff)';
+    document.body.style.color='#111';
+  }else{
+    document.body.style.background='linear-gradient(180deg,#081229,#0c1838,#0e1b44)';
+    document.body.style.color='#e9f1ff';
+  }
+}
+</script>
+</body>
+</html>
